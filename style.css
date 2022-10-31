@@ -1,0 +1,149 @@
+:root {
+	--primary-dark: #333;
+	--primary-light: #ededed;
+	--secondary-light: #fefefe;
+}
+
+html {
+	box-sizing: border-box;
+}
+
+*, *::before, *::after {
+	box-sizing: inherit;
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+	font-family: 'Roboto', sans-serif;
+	color: var(--primary-dark);
+	background-color: var(--primary-light);
+}
+
+/* Header Section */
+header {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 32px 0;
+}
+
+header h1 {
+	font-size: 64px;
+	font-weight: 900;
+}
+
+/* Main Section */
+main {
+	flex: 1;
+	display: flex;
+	justify-content: center;
+	gap: 80px;
+	margin-bottom: 48px;
+}
+
+/* Settings Section */
+main .settings {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	gap: 28px;
+	align-items: center;
+	width: 200px;
+}
+
+button,
+input {
+  width: 100%;
+  border: none;
+  color: inherit;
+  font-family: inherit;
+  font-size: inherit;
+	background-color: inherit;
+  cursor: pointer;
+  outline: none;
+}
+
+main .settings button {
+	padding: 10px 20px;
+  border: 1px solid var(--primary-dark);
+  border-radius: 5px;
+}
+
+main .settings button.active {
+  background-color: var(--primary-dark);
+  color: var(--primary-light);
+}
+
+main .settings input[type='color'] {
+  width: 80px;
+  height: 80px;
+  border: none;
+}
+
+input[type='color']::-webkit-color-swatch-wrapper {
+  padding: 0;
+}
+
+input[type='color']::-webkit-color-swatch {
+  border: none;
+  border-radius: 50px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+input[type='color']::-moz-color-swatch {
+	border: none;
+  border-radius: 50px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+button:hover,
+input[type='color']:hover {
+  transform: scale(1.05);
+}
+
+input[type='color']:active {
+  transition: transform 0.05s ease-in-out;
+  transform: scale(1);
+}
+
+button,
+input[type='color'] {
+  transition: transform 0.1s ease-in-out;
+}
+
+#sizeValue {
+	font-size: 20px;
+	margin-bottom: -16px;
+}
+
+/* Grid Section */
+main .grid {
+  width: 500px;
+  height: 500px;
+  background-color: var(--secondary-light);
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+/* Footer Section */
+footer {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 10px;
+	padding: 10px;
+	font-size: 20px;
+}
+
+.fa-github {
+  color: var(--primary-dark);
+  font-size: 24px;
+  transition: transform 0.3s ease-in-out;
+}
+
+.fa-github:hover {
+  transform: rotate(360deg) scale(1.2);
+}
