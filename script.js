@@ -8,6 +8,7 @@ const INITIAL_GRID_DIMENSION = 16;
 const INITIAL_COLOR_VALUE = "#333";
 const INITIAL_MODE = COLOR;
 const GRID_SQUARES_PARENT_SIZE = 500;
+const SQUARE_INITIAL_COLOR = "#fefefe";
 
 /* DOM Elements References */
 const colorPicker = document.querySelector(`#colorPicker`);
@@ -17,6 +18,8 @@ const eraserBtn = document.querySelector(`#eraserBtn`);
 const clearBtn = document.querySelector(`#clearBtn`);
 const sizeSlider = document.querySelector(`#sizeSlider`);
 const gridSquaresParent = document.querySelector(`.grid`);
+
+let currentMode = COLOR;
 
 /* Functions */
 function createGridSquares(gridDimension) {
@@ -36,5 +39,45 @@ function createGridSquares(gridDimension) {
 window.addEventListener('load', e => {
     colorBtn.classList.add('active');
     createGridSquares(INITIAL_GRID_DIMENSION);
-})
+});
 
+colorBtn.addEventListener('click', e => {
+    if (currentMode === COLOR)
+        return;
+    else if (currentMode === RAINBOW)
+        rainbowBtn.classList.remove('active');
+    else
+        eraserBtn.classList.remove('active');
+
+    colorBtn.classList.add('active');
+    currentMode = COLOR;
+});
+
+rainbowBtn.addEventListener('click', e => {
+    if (currentMode === rainbowBtn)
+        return;
+    else if (currentMode === COLOR)
+        colorBtn.classList.remove('active');
+    else
+        eraserBtn.classList.remove('active');
+
+    rainbowBtn.classList.add('active');
+    currentMode = RAINBOW;
+});
+
+eraserBtn.addEventListener('click', e => {
+    if (currentMode === ERASER)
+        return;
+    else if (currentMode === RAINBOW)
+        rainbowBtn.classList.remove('active');
+    else
+        colorBtn.classList.remove('active');
+
+    eraserBtn.classList.add('active');
+    currentMode = ERASER;
+});
+
+clearBtn.addEventListener('click', e => {
+    const gridSquares = gridSquaresParent.querySelectorAll('div');
+    gridSquares.forEach(square => square.style.backgroundColor = SQUARE_INITIAL_COLOR);
+});
