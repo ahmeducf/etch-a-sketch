@@ -16,6 +16,7 @@ const colorBtn = document.querySelector(`#colorBtn`);
 const rainbowBtn = document.querySelector(`#rainbowBtn`);
 const eraserBtn = document.querySelector(`#eraserBtn`);
 const clearBtn = document.querySelector(`#clearBtn`);
+const sizeValueDiv = document.querySelector(`#sizeValue`);
 const sizeSlider = document.querySelector(`#sizeSlider`);
 const gridSquaresParent = document.querySelector(`.grid`);
 
@@ -80,4 +81,11 @@ eraserBtn.addEventListener('click', e => {
 clearBtn.addEventListener('click', e => {
     const gridSquares = gridSquaresParent.querySelectorAll('div');
     gridSquares.forEach(square => square.style.backgroundColor = SQUARE_INITIAL_COLOR);
+});
+
+sizeSlider.addEventListener('change', e => {
+    sizeValueDiv.textContent = `${sizeSlider.value} x ${sizeSlider.value}`;
+
+    gridSquaresParent.innerHTML = '';
+    createGridSquares(sizeSlider.value);
 });
