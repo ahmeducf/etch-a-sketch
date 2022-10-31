@@ -21,20 +21,41 @@ const sizeSlider = document.querySelector(`#sizeSlider`);
 const gridSquaresParent = document.querySelector(`.grid`);
 
 let currentMode = COLOR;
+let mouseDown = false;
 
 /* Functions */
 function createGridSquares(gridDimension) {
     const squareDimension = GRID_SQUARES_PARENT_SIZE / gridDimension;
-    console.log(squareDimension);
 
     for (let i = 0; i < gridDimension; i++) {
         for (let j = 0; j < gridDimension; j++) {
             const square = document.createElement('div');
-            square.style.cssText = `width: ${squareDimension}px; height: ${squareDimension}px; border: 3px solid black`;
+            
+            square.addEventListener('mouseover', changeSquareColor);
+            square.addEventListener('mousedown', changeSquareColor);
+            
+            square.style.cssText = `width: ${squareDimension}px; height: ${squareDimension}px;`;
+            
             gridSquaresParent.appendChild(square);
         }
     }
 }
+
+function changeSquareColor(e) {
+    if (e.type === 'mouseover' && !mouseDown) return;
+
+    if (currentMode === RAINBOW) {
+        const randomR = Math.floor(Math.random() * 256);
+        const randomG = Math.floor(Math.random() * 256);
+        const randomB = Math.floor(Math.random() * 256);
+
+        e.target.style.backgroundColor = `rgb(${randomR}, ${randomG}, ${randomB})`;
+    } else if (currentMode === COLOR) {
+        e.target.style.backgroundColor = colorPicker.value;
+    } else if (currentMode === ERASER) {
+        e.target.style.backgroundColor = SQUARE_INITIAL_COLOR;
+    }
+} 
 
 /* Event Listeners */
 window.addEventListener('load', e => {
@@ -89,3 +110,6 @@ sizeSlider.addEventListener('change', e => {
     gridSquaresParent.innerHTML = '';
     createGridSquares(sizeSlider.value);
 });
+
+window.addEventListener('mousedown', () => mouseDown = true);
+window.addEventListener('mouseup', () => mouseDown = false);
